@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<persistence version="2.2"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence">
+  <persistence-unit name="IPWA02_DB">
+    <class>ipwa02.Anforderungen</class>
+    <class>ipwa02.Aufgaben</class>
+    <class>ipwa02.Testfaelle</class>
+    <class>ipwa02.Testlaeufe</class>
+    <class>ipwa02.Personen</class>
+    <properties>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/IPWA02_DB"/>
+      <property name="jakarta.persistence.jdbc.user" value="test"/>
+      <property name="jakarta.persistence.jdbc.password" value="132457689"/>
+
+      <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>

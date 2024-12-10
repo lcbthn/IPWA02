@@ -1,0 +1,61 @@
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head>
+    <title>Require4Testing</title>
+    <link rel="icon" href="#{resource['images/home.png']}" type="image/png"/>
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
+    <h:outputStylesheet name="styles.css" />
+</h:head>
+<h:body>
+    <div class="card">
+        <h:form>
+            <p:menubar hideDelay="500" styleClass="nav-menu">
+                <f:facet name="start">
+                    <h:outputLink value="https://github.com/Jardin93/IPWA02-01_Require4Testing">
+                        <p:graphicImage name="images/github-mark.svg" styleClass="menu-logo" />
+                    </h:outputLink>
+                </f:facet>
+                <p:menuitem outcome="index" value="Home" icon="pi pi-home" />
+
+                <p:menuitem outcome="AnforderungHinzufügen" value="Anforderung erstellen" icon="pi pi-fw pi-plus" rendered="#{Service.rolle == 'Requirements Engineer'}"/>
+                <p:menuitem outcome="TestlaufHinzufügen" value="Testlauf erstellen" icon="pi pi-fw pi-plus" rendered="#{Service.rolle == 'Testmanager'}"/>
+                <p:menuitem outcome="TestfallHinzufügen" value="Testfall erstellen" icon="pi pi-fw pi-plus" rendered="#{Service.rolle == 'Testfallersteller'}"/>
+
+
+
+                <f:facet name="end">
+                    <p:button outcome="LoginRegister" value="Login / Registrieren" icon="pi pi-fw pi-sign-in" styleClass="ui-button-info" rendered="#{!Service.loggedIn}"/>
+                    <p:commandButton action="#{Service.abmelden}" value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" rendered="#{Service.loggedIn}"/>
+                </f:facet>
+            </p:menubar>
+        </h:form>
+    </div><br />
+    <div class="card">
+        <div class="grid" >
+            <div class="col-2 flex align-items-center justify-content-center" />
+            <div class="col-8 flex align-items-center justify-content-center">
+                <h:form>
+                    <h5>Titel</h5>
+                    <p:outputLabel id="Titel" value="#{Service.einAusgabeListe[0]}" required="true" />
+                    <h5>Beschreibung</h5>
+                    <p:outputLabel rows="6" cols="60" value="#{Service.einAusgabeListe[1]}"/>
+                    <h5>Anforderung</h5>
+                    <p:outputLabel rows="6" cols="60" value="#{Service.einAusgabeListe[2]}"/>
+                    <h5>Status</h5>
+                    <p:inputText id="Status" value="#{Service.einAusgabeListe[3]}" rendered="#{Service.rolle == 'Tester'}" />
+                    <p:outputLabel rows="6" cols="60" value="#{Service.einAusgabeListe[3]}" rendered="#{Service.rolle != 'Tester'}" />
+                    <h5>Testschritte</h5>
+                    <p:inputTextarea rows="6" cols="60" value="#{Service.einAusgabeListe[4]}" rendered="#{Service.rolle == 'Testfallersteller'}" />
+                    <p:outputLabel rows="6" cols="60" value="#{Service.einAusgabeListe[4]}" rendered="#{Service.rolle != 'Testfallersteller'}" />
+                    <br />
+                    <p:commandButton action="#{Service.testfallSpeichern()}" value="Speichern" />
+                </h:form>
+            </div>
+            <div class="col-2 flex align-items-center justify-content-center" />
+        </div>
+    </div>
+</h:body>
+</html>
